@@ -1,0 +1,1 @@
+EXTRAOPTIONS="--no-tpm=1 --quiet -r /dev/urandom"
