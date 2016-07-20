@@ -85,9 +85,6 @@ resource "aws_instance" "openswan-server" {
   tags {
       Name                    = "${var.tag_name}-server"
   }
-  root_block_device = {
-    delete_on_termination     = true
-  }
 }
 
 # Create Elastic IP for Openswan Server
