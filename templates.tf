@@ -2,14 +2,14 @@
 # Template Configuration File
 
 resource "template_file" "ipsec-conf" {
-    filename = "./templates/ipsec.conf.tpl"
+    template = "${file("${path.module}/templates/ipsec.conf.tpl")}"
     vars {
         openswan-server-private-ip = "${aws_instance.openswan-server.private_ip}"
     }
 }
 
 resource "template_file" "ipsec-secrets" {
-    filename = "./templates/ipsec.secrets.tpl"
+    template = "${file("${path.module}/templates/ipsec.secrets.tpl")}"
     vars {
         openswan-server-private-ip = "${aws_instance.openswan-server.private_ip}"
         openswan-server-public-ip  = "${aws_eip.openswan-server.public_ip}"
@@ -18,7 +18,7 @@ resource "template_file" "ipsec-secrets" {
 }
 
 resource "template_file" "options-xl2tpd" {
-    filename = "./templates/options.xl2tpd.tpl"
+    template = "${file("${path.module}/templates/options.xl2tpd.tpl")}"
     vars {
         openswan-vpn-client-dns1 = "8.8.8.8"
         openswan-vpn-client-dns2 = "8.8.4.4"
@@ -26,7 +26,7 @@ resource "template_file" "options-xl2tpd" {
 }
 
 resource "template_file" "xl2tpd-conf" {
-    filename = "./templates/xl2tpd.conf.tpl"
+    template = "${file("${path.module}/templates/xl2tpd.conf.tpl")}"
     vars {
         openswan-server-private-ip     = "${aws_instance.openswan-server.private_ip}"
         openswan-vpn-client-dhcp-start = "${var.existing_subnet_prefix}.245"
@@ -35,7 +35,7 @@ resource "template_file" "xl2tpd-conf" {
 }
 
 resource "template_file" "openswan-script" {
-    filename = "./templates/openswan-script.sh.tpl"
+    template = "${file("${path.module}/templates/openswan-script.sh.tpl")}"
     vars {
         openswan-vpn-username = "${var.vpn_username}"
         openswan-vpn-password = "${var.vpn_password}"

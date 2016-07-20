@@ -45,12 +45,12 @@ variable "existing_default_sg_id" {
 # New Items
 variable "public_key_path" {
   description = "Path to Public Key"
-  default     = "./keys/aws-keypair-01.pub"
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "private_key_path" {
   description = "Path to Private Key"
-  default     = "./keys/aws-keypair-01.pem"
+  default     = "~/.ssh/id_rsa"
 }
 
 variable "key_name" {

@@ -1,0 +1,3 @@
+# terraform (ignore tfstate and tfvars)
+**/*.tfstate*
+**/*.tfvars
