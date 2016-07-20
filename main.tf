@@ -85,6 +85,9 @@ resource "aws_instance" "openswan-server" {
   tags {
       Name                    = "${var.tag_name}-server"
   }
+  root_block_device {
+    delete_on_termination = true
+  }
 }
 
 # Create Elastic IP for Openswan Server
@@ -132,5 +135,5 @@ resource "null_resource" "openswan-server-provisioning" {
       "sudo chmod +x /tmp/openswan-script.sh",
       "sudo /tmp/openswan-script.sh"
     ]
-  }  
+  }
 }
