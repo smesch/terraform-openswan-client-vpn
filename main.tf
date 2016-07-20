@@ -83,9 +83,11 @@ resource "aws_instance" "openswan-server" {
   associate_public_ip_address = true
   source_dest_check           = false
   tags {
-      Name = "${var.tag_name}-server"
+      Name                    = "${var.tag_name}-server"
   }
-#  user_data                   = "${file("./files/user-data")}"  
+  root_block_device = {
+    delete_on_termination     = true
+  }
 }
 
 # Create Elastic IP for Openswan Server
