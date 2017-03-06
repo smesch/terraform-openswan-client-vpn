@@ -102,7 +102,7 @@ resource "null_resource" "openswan-server-provisioning" {
   connection {
     user        = "centos"
     key_file    = "${var.private_key_path}"
-    agent       = false
+    agent       = true
     host        = "${aws_eip.openswan-server.public_ip}"
   }
   provisioner "file" {
