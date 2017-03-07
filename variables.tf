@@ -1,20 +1,9 @@
 # Openswan AWS Infrastructure
 # Variable Configuration File
 
-# Provider Details & Region
-variable "access_key" {
-  description = "AWS Access Key ID"
-#  default     = ""
-}
-
-variable "secret_key" {
-  description = "AWS Secret Access Key"
-#  default     = ""
-}
-
+# AWS Region
 variable "aws_region" {
   description = "AWS Region (ex: us-east-1)"
-#  default     = ""
 }
 
 # Existing AWS Resources

@@ -1,10 +1,8 @@
 # Openswan AWS Infrastructure
 # Main Configuration File
 
-# Specify AWS as the provider, AWS access details and a region
+# Specify AWS as the provider and a region
 provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
   region     = "${var.aws_region}"
 }
 
