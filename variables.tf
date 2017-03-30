@@ -63,12 +63,10 @@ variable "vpn_username" {
 
 variable "vpn_password" {
     description = "VPN User Password"
-    default     = "NeedAccess12"
 }
 
 variable "vpn_preshared_key" {
     description = "VPN Pre-Shared Key"
-    default     = "NeedAccess1234"
 }
 
 # CentOS 7 (x86_64) - with Updates HVM (02/25/16)
