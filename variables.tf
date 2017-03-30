@@ -23,8 +23,12 @@ variable "existing_subnet_cidr_block" {
   description = "AWS Existing Subnet CIDR Block (ex: 192.168.101.0/24)"
 }
 
-variable "existing_subnet_prefix" {
-  description = "AWS Existing Subnet Prefix (ex: 192.168.101)"
+variable "dhcp_start_host" {
+  description = "The host number for the start of the VPN DHCP range (ex: 245). If you specify \"245\" and the \"existing_subnet_cidr_block\" is \"192.168.101.0/24\" the start of your DHCP range would be \"192.168.101.245\"."
+}
+
+variable "dhcp_end_host" {
+  description = "The host number for the end of the VPN DHCP range (ex: 249). If you specify \"249\" and the \"existing_subnet_cidr_block\" is \"192.168.101.0/24\" the end of your DHCP range would be \"192.168.101.249\"."
 }
 
 variable "existing_default_sg_id" {
@@ -48,23 +52,21 @@ variable "key_name" {
 }
 
 variable "tag_name" {
-    description = "Name Tag Prefix"
-    default     = "openswan"
+  description = "Name Tag Prefix"
+  default     = "openswan"
 }
 
 variable "vpn_username" {
-    description = "VPN User Username"
-    default     = "vpnuser"
+  description = "VPN User Username"
+  default     = "vpnuser"
 }
 
 variable "vpn_password" {
-    description = "VPN User Password"
-    default     = "NeedAccess12"
+  description = "VPN User Password"
 }
 
 variable "vpn_preshared_key" {
-    description = "VPN Pre-Shared Key"
-    default     = "NeedAccess1234"
+  description = "VPN Pre-Shared Key"
 }
 
 # CentOS 7 (x86_64) - with Updates HVM (02/25/16)
