@@ -104,7 +104,7 @@ resource "null_resource" "openswan-server-provisioning" {
     host        = "${aws_eip.openswan-server.public_ip}"
   }
   provisioner "file" {
-    source      = "./files/"
+    source      = "${path.module}/files/"
     destination = "/tmp"
   }
   provisioner "file" {
