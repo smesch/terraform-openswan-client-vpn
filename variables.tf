@@ -52,21 +52,21 @@ variable "key_name" {
 }
 
 variable "tag_name" {
-    description = "Name Tag Prefix"
-    default     = "openswan"
+  description = "Name Tag Prefix"
+  default     = "openswan"
 }
 
 variable "vpn_username" {
-    description = "VPN User Username"
-    default     = "vpnuser"
+  description = "VPN User Username"
+  default     = "vpnuser"
 }
 
 variable "vpn_password" {
-    description = "VPN User Password"
+  description = "VPN User Password"
 }
 
 variable "vpn_preshared_key" {
-    description = "VPN Pre-Shared Key"
+  description = "VPN Pre-Shared Key"
 }
 
 # CentOS 7 (x86_64) - with Updates HVM (02/25/16)

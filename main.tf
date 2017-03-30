@@ -3,7 +3,7 @@
 
 # Specify AWS as the provider and a region
 provider "aws" {
-  region     = "${var.aws_region}"
+  region = "${var.aws_region}"
 }
 
 # Create a Security Group for the Openswan VPN Server
@@ -80,9 +80,11 @@ resource "aws_instance" "openswan-server" {
   subnet_id                   = "${var.existing_subnet_id}"
   associate_public_ip_address = true
   source_dest_check           = false
+
   tags {
-      Name                    = "${var.tag_name}-server"
+    Name = "${var.tag_name}-server"
   }
+
   root_block_device {
     delete_on_termination = true
   }
@@ -91,47 +93,55 @@ resource "aws_instance" "openswan-server" {
 # Create Elastic IP for Openswan Server
 resource "aws_eip" "openswan-server" {
   instance = "${aws_instance.openswan-server.id}"
-  vpc = true
+  vpc      = true
 }
 
 # Provision Openswan Server Instance
 resource "null_resource" "openswan-server-provisioning" {
-  depends_on    = ["aws_instance.openswan-server"]
+  depends_on = ["aws_instance.openswan-server"]
+
   connection {
-    user        = "centos"
-    key_file    = "${var.private_key_path}"
-    agent       = true
-    host        = "${aws_eip.openswan-server.public_ip}"
+    user     = "centos"
+    key_file = "${var.private_key_path}"
+    agent    = true
+    host     = "${aws_eip.openswan-server.public_ip}"
   }
+
   provisioner "file" {
     source      = "${path.module}/files/"
     destination = "/tmp"
   }
+
   provisioner "file" {
     content     = "${template_file.openswan-script.rendered}"
     destination = "/tmp/openswan-script.sh"
   }
+
   provisioner "file" {
     content     = "${template_file.ipsec-conf.rendered}"
     destination = "/tmp/ipsec.conf"
   }
+
   provisioner "file" {
     content     = "${template_file.ipsec-secrets.rendered}"
     destination = "/tmp/ipsec.secrets"
   }
+
   provisioner "file" {
     content     = "${template_file.options-xl2tpd.rendered}"
     destination = "/tmp/options.xl2tpd"
   }
+
   provisioner "file" {
     content     = "${template_file.xl2tpd-conf.rendered}"
     destination = "/tmp/xl2tpd.conf"
   }
+
   provisioner "remote-exec" {
     inline = [
       "sleep 30",
       "sudo chmod +x /tmp/openswan-script.sh",
-      "sudo /tmp/openswan-script.sh"
+      "sudo /tmp/openswan-script.sh",
     ]
   }
 }
