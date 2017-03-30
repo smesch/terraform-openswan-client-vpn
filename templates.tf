@@ -29,8 +29,8 @@ resource "template_file" "xl2tpd-conf" {
     template = "${file("${path.module}/templates/xl2tpd.conf.tpl")}"
     vars {
         openswan-server-private-ip     = "${aws_instance.openswan-server.private_ip}"
-        openswan-vpn-client-dhcp-start = "${var.existing_subnet_prefix}.245"
-        openswan-vpn-client-dhcp-end   = "${var.existing_subnet_prefix}.249"
+        openswan-vpn-client-dhcp-start = "${cidrhost(var.existing_subnet_cidr_block, var.dhcp_start_host)}"
+        openswan-vpn-client-dhcp-end   = "${cidrhost(var.existing_subnet_cidr_block, var.dhcp_end_host)}"
     }
 }
 

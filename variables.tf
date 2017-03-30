@@ -23,8 +23,12 @@ variable "existing_subnet_cidr_block" {
   description = "AWS Existing Subnet CIDR Block (ex: 192.168.101.0/24)"
 }
 
-variable "existing_subnet_prefix" {
-  description = "AWS Existing Subnet Prefix (ex: 192.168.101)"
+variable "dhcp_start_host" {
+  description = "The host number for the start of the VPN DHCP range (ex: 245). If you specify \"245\" and the \"existing_subnet_cidr_block\" is \"192.168.101.0/24\" the start of your DHCP range would be \"192.168.101.245\"."
+}
+
+variable "dhcp_end_host" {
+  description = "The host number for the end of the VPN DHCP range (ex: 249). If you specify \"249\" and the \"existing_subnet_cidr_block\" is \"192.168.101.0/24\" the end of your DHCP range would be \"192.168.101.249\"."
 }
 
 variable "existing_default_sg_id" {
